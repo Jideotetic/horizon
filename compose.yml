@@ -1,7 +1,6 @@
 services:
   horizon:
     build: .
-    platform: linux/amd64
     ports:
       - "8006:8000"
     volumes:
