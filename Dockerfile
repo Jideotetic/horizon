@@ -1,0 +1,1 @@
+FROM stellar/stellar-horizon:latest
