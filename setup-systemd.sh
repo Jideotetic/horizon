@@ -1,8 +1,8 @@
 #!/bin/bash
 
-SERVICE_NAME="horizon-testnet"
-APP_DIR="/home/jideotetic/horizon"
-REPO_URL="git@github.com:Jideotetic/horizon.git"
+SERVICE_NAME="stellar-horizon-node-instance-testnet"
+APP_DIR="/home/jideotetic/stellar-horizon-node-instance-testnet"
+REPO_URL="git@github.com:Jideotetic/stellar-horizon-node-instance-testnet.git"
 DOCKER_COMPOSE_BIN="/usr/bin/docker compose"
 SERVICE_FILE="/etc/systemd/system/${SERVICE_NAME}.service"
 
