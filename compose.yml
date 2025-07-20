@@ -9,22 +9,22 @@ services:
     image: jideotetic/stellar-horizon-node-instance-testnet:latest
     restart: always
 
-  stellar-horizon-node-instance-testnet2:
-    ports:
-      - "8007:8000"
-    volumes:
-      - ./config:/opt/stellar
-    env_file:
-      - .env
-    image: jideotetic/stellar-horizon-node-instance-testnet:latest
-    restart: always
+  # stellar-horizon-node-instance-testnet2:
+  #   ports:
+  #     - "8007:8000"
+  #   volumes:
+  #     - ./config:/opt/stellar
+  #   env_file:
+  #     - .env
+  #   image: jideotetic/stellar-horizon-node-instance-testnet:latest
+  #   restart: always
 
-  stellar-horizon-node-instance-testnet3:
-    ports:
-      - "8008:8000"
-    volumes:
-      - ./config:/opt/stellar
-    env_file:
-      - .env
-    image: jideotetic/stellar-horizon-node-instance-testnet:latest
-    restart: always
+  # stellar-horizon-node-instance-testnet3:
+  #   ports:
+  #     - "8008:8000"
+  #   volumes:
+  #     - ./config:/opt/stellar
+  #   env_file:
+  #     - .env
+  #   image: jideotetic/stellar-horizon-node-instance-testnet:latest
+  #   restart: always
