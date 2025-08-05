@@ -1,30 +1,72 @@
 services:
+  postgres:
+    image: postgres:latest
+    platform: linux/amd64
+    environment:
+      POSTGRES_DB: horizon-testnet
+      POSTGRES_USER: horizon-testnet
+      POSTGRES_PASSWORD: 3xjtiT5^B9gWY8Sy80nHOWEdlqp
+    volumes:
+      - /data/db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U horizon-testnet -d horizon-testnet"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  migrate:
+    image: stellar-horizon-node-instance-testnet
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./config:/opt/stellar
+    env_file:
+      - .env
+    entrypoint: ["stellar-horizon", "db", "migrate", "up"]
+    restart: "no"
+
   stellar-horizon-node-instance-testnet1:
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      postgres:
+        condition: service_healthy
     ports:
       - "8006:8000"
     volumes:
       - ./config:/opt/stellar
     env_file:
       - .env
-    image: jideotetic/stellar-horizon-node-instance-testnet:latest
+    image: stellar-horizon-node-instance-testnet
     restart: always
 
-  # stellar-horizon-node-instance-testnet2:
-  #   ports:
-  #     - "8007:8000"
-  #   volumes:
-  #     - ./config:/opt/stellar
-  #   env_file:
-  #     - .env
-  #   image: jideotetic/stellar-horizon-node-instance-testnet:latest
-  #   restart: always
+  stellar-horizon-node-instance-testnet2:
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8007:8000"
+    volumes:
+      - ./config:/opt/stellar
+    env_file:
+      - .env
+    image: stellar-horizon-node-instance-testnet
+    restart: always
 
-  # stellar-horizon-node-instance-testnet3:
-  #   ports:
-  #     - "8008:8000"
-  #   volumes:
-  #     - ./config:/opt/stellar
-  #   env_file:
-  #     - .env
-  #   image: jideotetic/stellar-horizon-node-instance-testnet:latest
-  #   restart: always
+  stellar-horizon-node-instance-testnet3:
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8008:8000"
+    volumes:
+      - ./config:/opt/stellar
+    env_file:
+      - .env
+    image: stellar-horizon-node-instance-testnet
+    restart: always
